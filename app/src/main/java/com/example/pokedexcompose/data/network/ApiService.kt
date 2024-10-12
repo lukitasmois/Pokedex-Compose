@@ -12,6 +12,6 @@ interface ApiService {
     @GET("pokemon/")
     suspend fun getPokemons(): Response<PokemonResponseModel>
 
-    @GET("pokemon/{id}")
+    @GET("pokemon-form/{id}")
     suspend fun getPokemon(@Path("id") id : Int) : Response<Pokemon>
 }
