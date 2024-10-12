@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.example.pokedexcompose.navigation.Routes
 
 @Composable
 fun WelcomeScreen(navController: NavController) {
@@ -18,7 +19,7 @@ Column(
     horizontalAlignment = Alignment.CenterHorizontally) {
     Text("Bienvenido a la pokedex con compose!!")
     Button(onClick = {
-        //navController.navigate(route = Routes.FIRST_SCREEN)
+        navController.navigate(route = Routes.POKEMON_LIST_SCREEN)
     }) {
         Text(text = "Ver Listas de pokemons")
     }
