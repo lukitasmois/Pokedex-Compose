@@ -31,7 +31,7 @@ class GetServicePokemons(
 
         withContext(Dispatchers.IO) {
         //val response = apiService.getPokemons()
-            for(i in 0..9){
+            for(i in 0..21){
                 //response.body()?.results?.get(19)?.name?.let { Log.d("response", it) }
                 var response = apiService.getPokemon(i)
                 if (response.isSuccessful){
