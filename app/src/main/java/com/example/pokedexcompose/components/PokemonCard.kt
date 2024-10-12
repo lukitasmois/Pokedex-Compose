@@ -1,6 +1,8 @@
 package com.example.pokedexcompose.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -29,14 +31,14 @@ import com.example.pokedexcompose.navigation.AppNavigation
 
 @Composable
 //fun PokemonCard(id: String, name: String, image: String ){
-fun PokemonCard(item : Pokemon ){
+fun PokemonCard(item : Pokemon, onClick: () -> Unit ){
     Card(
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(4.dp),
-        modifier = Modifier.width(250.dp).padding(10.dp),
-        onClick = {
+        modifier = Modifier.width(250.dp)
+            .padding(10.dp)
+            .clickable { onClick() }
 
-        }
     ) {
         Row(
             modifier = Modifier.padding(16.dp)

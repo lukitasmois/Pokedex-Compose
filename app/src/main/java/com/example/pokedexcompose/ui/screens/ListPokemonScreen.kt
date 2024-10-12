@@ -1,6 +1,7 @@
 package com.example.pokedexcompose.ui.screens
 
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.pokedexcompose.components.PokemonCard
+import com.example.pokedexcompose.navigation.Routes
 import com.example.pokedexcompose.ui.viewmodels.ListPokemonViewModel
 
 
@@ -34,8 +36,11 @@ fun ListPokemonScreen(navController: NavController, listPokemonViewModel: ListPo
         Text("Lista de Pokemones")
         //PokemonCard("1", "nombre", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")
         LazyColumn {
-            items(pokemons){
-                PokemonCard(item = it)
+            items(pokemons){ pokemon ->
+                PokemonCard(item = pokemon){
+                    navController.navigate("${Routes.POKEMON_DETAILS_SCREEN}/${pokemon.id}")
+                    Log.d("hice cllick", pokemon.id.toString())
+                }
             }
         }
     }

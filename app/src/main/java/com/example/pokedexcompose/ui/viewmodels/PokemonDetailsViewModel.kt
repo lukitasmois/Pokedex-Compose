@@ -1,6 +1,5 @@
 package com.example.pokedexcompose.ui.viewmodels
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,32 +8,30 @@ import com.example.pokedexcompose.data.entities.Pokemon
 import com.example.pokedexcompose.data.network.GetServicePokemons
 import kotlinx.coroutines.launch
 
-class ListPokemonViewModel(
-    private val getPokemonsUseCase: GetServicePokemons
-): ViewModel() {
+class PokemonDetailsViewModel(
+    private val getPokemonsUseCase: GetServicePokemons)
+    :ViewModel() {
+        var Pokemon = mutableStateOf<Pokemon?>(null)
 
-    var Pokemons = mutableStateOf<List<Pokemon>>(listOf())
-
-    fun loadPokemons() {
-
+    fun loadPokemon(pokemonId: Int) {
         viewModelScope.launch {
-            val pokemons = getPokemonsUseCase.getPokemons()
-            if(pokemons.isNotEmpty()) {
-                Pokemons.value = pokemons
-                for (pokemon in pokemons){
-                    Log.d("pokemons", pokemon.name)
-                }
+            val pokemon = getPokemonsUseCase.getPokemon(pokemonId)
+            if(pokemon != null) {
+                Pokemon.value = pokemon
             }
         }
     }
 
-    companion object {
 
+    companion object {
         fun provideFactory(getPokemonsUseCase: GetServicePokemons): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return ListPokemonViewModel(getPokemonsUseCase) as T
+                return PokemonDetailsViewModel(getPokemonsUseCase) as T
             }
         }
     }
+
+
 }
+
